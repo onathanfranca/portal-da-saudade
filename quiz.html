@@ -127,6 +127,7 @@
   .loading-text { font-size:0.85rem; color:#777; font-weight:400; }
 
   .price-installment { font-size:0.8rem; color:#777; margin-bottom:14px; }
+  .interp-card:hover { border-color:#c09a55; box-shadow:0 4px 18px rgba(192,154,85,0.15); transform:translateY(-2px); }
   @keyframes fadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
   .page.active .container { animation:fadeUp 0.32s ease both; }
 </style>
@@ -343,21 +344,21 @@
   <div class="container">
     <div class="q-box"><h2>Você sabia que a conexão espiritual é mais forte quando o desejo é genuíno e imediato? Você está preparado(a) para dar esse passo agora?</h2></div>
     <div class="options">
-      <div class="opt" onclick="ir('mediuns')">🙏 Sim, estou preparado(a)</div>
-      <div class="opt" onclick="ir('mediuns')">🤲 Não estou preparado(a)</div>
+      <div class="opt" onclick="ir('q11s')">🙏 Sim, estou preparado(a)</div>
+      <div class="opt" onclick="ir('q11s')">🤲 Não estou preparado(a)</div>
     </div>
   </div>
 </div>
 
 <!-- ══ MEDIUNS ══ -->
 <div class="page" id="page-mediuns">
-  <div class="header"><button class="back-btn" onclick="ir('q11')">←</button><img src="/img/logo.png" alt="Portal da Saudade" style="height:32px;width:auto;"></div>
+  <div class="header"><button class="back-btn" onclick="ir('pre-mediuns')">←</button><img src="/img/logo.png" alt="Portal da Saudade" style="height:32px;width:auto;"></div>
   <div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div></div>
   <div class="container">
     <h2 class="title" style="text-align:center;margin-bottom:8px;">Escolha o médium que vai se comunicar com seu ente querido</h2>
     <p class="gender-note">A conexão costuma ser mais intensa quando o médium é do <strong>mesmo sexo</strong> que o seu ente querido.</p>
 
-    <div class="medium-card" onclick="ir('contribuir')">
+    <div class="medium-card" onclick="selecionarMedium('Dona Benta')">
       <div class="medium-avatar"><img src="https://pedirminhacarta.lovable.app/assets/medium-1-CagzXF2P.jpg" alt="Dona Benta"></div>
       <div>
         <div class="medium-name">Dona Benta</div>
@@ -367,7 +368,7 @@
       </div>
     </div>
 
-    <div class="medium-card" onclick="ir('contribuir')">
+    <div class="medium-card" onclick="selecionarMedium('Chico Almeida')">
       <div class="badge-pop">Mais escolhido</div>
       <div class="medium-avatar"><img src="https://pedirminhacarta.lovable.app/assets/medium-2-BwTplJ5z.jpg" alt="Chico Almeida"></div>
       <div>
@@ -378,7 +379,7 @@
       </div>
     </div>
 
-    <div class="medium-card" onclick="ir('contribuir')">
+    <div class="medium-card" onclick="selecionarMedium('Amélia de Sá')">
       <div class="medium-avatar"><img src="https://pedirminhacarta.lovable.app/assets/medium-3-CCK7glCb.jpg" alt="Amélia de Sá"></div>
       <div>
         <div class="medium-name">Amélia de Sá</div>
@@ -388,7 +389,7 @@
       </div>
     </div>
 
-    <div class="medium-card" onclick="ir('contribuir')">
+    <div class="medium-card" onclick="selecionarMedium('Anderlino')">
       <div class="medium-avatar"><img src="https://pedirminhacarta.lovable.app/assets/medium-4-CTkNYVWJ.jpg" alt="Anderlino"></div>
       <div>
         <div class="medium-name">Anderlino</div>
@@ -402,7 +403,7 @@
 
 <!-- ══ CONTRIBUIR ══ -->
 <div class="page" id="page-contribuir">
-  <div class="header"><button class="back-btn" onclick="ir('mediuns')">←</button><img src="/img/logo.png" alt="Portal da Saudade" style="height:32px;width:auto;"></div>
+  <div class="header"><button class="back-btn" onclick="ir('interpretacao')">←</button><img src="/img/logo.png" alt="Portal da Saudade" style="height:32px;width:auto;"></div>
   <div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div></div>
   <div class="container">
     <h2 class="title" style="text-align:center;margin-bottom:16px;">Escolha a sua contribuição</h2>
@@ -450,6 +451,7 @@
 const RELS_M = ["Meu avô","Meu pai","Meu irmão","Meu marido","Meu namorado","Meu filho","Meu tio","Meu sobrinho","Meu afilhado","Meu amigo","Meu neto","Meu primo","Meu cunhado","Meu sogro","Meu genro","Meu padrasto","Meu enteado","Meu bisavô"];
 const RELS_F = ["Minha avó","Minha mãe","Minha irmã","Minha esposa","Minha namorada","Minha filha","Minha tia","Minha sobrinha","Minha afilhada","Minha amiga","Minha neta","Minha prima","Minha cunhada","Minha sogra","Minha nora","Minha madrasta","Minha enteada","Minha bisavó"];
 let querMensagem = false;
+let mediumEscolhido = '';
 
 function ir(id) {
   const l = document.getElementById('loading');
@@ -460,6 +462,13 @@ function ir(id) {
     window.scrollTo(0, 0);
     l.classList.remove('active');
   }, 300);
+}
+
+function selecionarMedium(nome) {
+  mediumEscolhido = nome;
+  const el = document.getElementById('medium-nome-display');
+  if (el) el.textContent = nome;
+  ir('como-funciona');
 }
 
 function setSexo(sexo) {
@@ -516,5 +525,91 @@ document.addEventListener('DOMContentLoaded', () => {
   if (email) email.addEventListener('input', check9);
 });
 </script>
+
+<!-- ══ Q11S: SEGURANÇA ══ -->
+<div class="page" id="page-q11s">
+  <div class="header"><button class="back-btn" onclick="ir('q11')">←</button><img src="/img/logo.png" alt="Portal da Saudade" style="height:32px;width:auto;"></div>
+  <div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" style="width:89%"></div></div></div>
+  <div class="container">
+    <div class="trans" style="padding-top:32px;">
+      <h2 style="font-size:1.85rem;line-height:1.2;margin-bottom:20px;">Não tenha medo, nós sabemos nos conectar com o mundo espiritual em total segurança</h2>
+      <p class="body-txt">As cartas psicografadas são realizadas com respeito absoluto ao plano espiritual e às energias envolvidas. O objetivo aqui é o amor e a conexão, nunca algo que possa trazer desequilíbrio. É um processo seguro e acolhedor, guiado por profissionais preparados.</p>
+      <button class="btn" onclick="ir('pre-mediuns')">Estou pronto(a) para continuar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRE-MEDIUNS ══ -->
+<div class="page" id="page-pre-mediuns">
+  <div class="header"><button class="back-btn" onclick="ir('q11s')">←</button><img src="/img/logo.png" alt="Portal da Saudade" style="height:32px;width:auto;"></div>
+  <div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div></div>
+  <div class="container">
+    <div class="trans" style="padding-top:24px;">
+      <div class="icon">🕊️</div>
+      <h2 style="font-size:1.7rem;margin-bottom:16px;">Hora de escolher o seu <em style="font-style:italic;color:#c09a55;">médium</em></h2>
+      <p class="body-txt" style="margin-bottom:16px;">Cada médium tem uma sensibilidade própria e uma forma única de se conectar com o plano espiritual.</p>
+      <div class="info-box" style="text-align:left;">
+        Daqui a pouco você vai conhecer cada um deles e poderá escolher aquele com quem sentir mais afinidade. <strong>Confie no seu coração.</strong> Ele sabe quem é a pessoa certa pra trazer a mensagem que você precisa receber.
+      </div>
+      <button class="btn" onclick="ir('mediuns')">Conhecer os médiuns</button>
+      <p style="margin-top:14px;font-size:0.84rem;color:#888;cursor:pointer;" onclick="ir('q11s')">Voltar</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COMO FUNCIONA ══ -->
+<div class="page" id="page-como-funciona">
+  <div class="header"><button class="back-btn" onclick="ir('mediuns')">←</button><img src="/img/logo.png" alt="Portal da Saudade" style="height:32px;width:auto;"></div>
+  <div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" style="width:97%"></div></div></div>
+  <div class="container">
+    <h2 class="title" style="margin-bottom:6px;">Como vai <em style="font-style:italic;color:#c09a55;">funcionar?</em></h2>
+    <p style="font-size:0.84rem;color:#888;margin-bottom:20px;">Médium escolhido: <strong id="medium-nome-display"></strong></p>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="min-width:34px;height:34px;border-radius:50%;background:#c09a55;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.95rem;">1</div>
+        <div><strong style="font-size:0.94rem;color:#1a1412;">Recebemos suas informações</strong><p style="font-size:0.85rem;color:#4a4440;line-height:1.6;margin-top:3px;">O médium que você escolheu recebe tudo o que você compartilhou, em total sigilo.</p></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="min-width:34px;height:34px;border-radius:50%;background:#c09a55;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.95rem;">2</div>
+        <div><strong style="font-size:0.94rem;color:#1a1412;">A conexão é feita</strong><p style="font-size:0.85rem;color:#4a4440;line-height:1.6;margin-top:3px;">Em um momento de profundo recolhimento, o médium se conecta com o plano espiritual e leva ao seu ente querido tudo o que você quis dizer.</p></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="min-width:34px;height:34px;border-radius:50%;background:#c09a55;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.95rem;">3</div>
+        <div><strong style="font-size:0.94rem;color:#1a1412;">A carta é psicografada</strong><p style="font-size:0.85rem;color:#4a4440;line-height:1.6;margin-top:3px;">O médium recebe as mensagens e transcreve cada palavra com cuidado, pra que nada se perca.</p></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="min-width:34px;height:34px;border-radius:50%;background:#c09a55;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.95rem;">4</div>
+        <div><strong style="font-size:0.94rem;color:#1a1412;">Você recebe pelo WhatsApp</strong><p style="font-size:0.85rem;color:#4a4440;line-height:1.6;margin-top:3px;">A carta chega no seu WhatsApp junto com uma mensagem pessoal do médium que conduziu a conexão.</p></div>
+      </div>
+    </div>
+    <button class="btn" onclick="ir('interpretacao')">Estou pronto(a) pra continuar</button>
+    <p style="margin-top:14px;font-size:0.84rem;color:#888;cursor:pointer;text-align:center;" onclick="ir('mediuns')">Escolher outro médium</p>
+  </div>
+</div>
+
+<!-- ══ INTERPRETAÇÃO ══ -->
+<div class="page" id="page-interpretacao">
+  <div class="header"><button class="back-btn" onclick="ir('como-funciona')">←</button><img src="/img/logo.png" alt="Portal da Saudade" style="height:32px;width:auto;"></div>
+  <div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" style="width:99%"></div></div></div>
+  <div class="container">
+    <h2 class="title" style="margin-bottom:12px;">Você quer a <em style="font-style:italic;color:#c09a55;">interpretação</em> da carta?</h2>
+    <p style="font-size:0.88rem;color:#4a4440;line-height:1.7;margin-bottom:20px;font-weight:300;">Além da carta, o médium pode te enviar uma interpretação pessoal explicando os sentimentos e as mensagens mais profundas que vieram do plano espiritual.</p>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
+      <div class="interp-card" onclick="ir('contribuir')" style="position:relative;background:#fff;border:1.5px solid #e5ddd2;border-radius:14px;padding:20px 18px;cursor:pointer;transition:all 0.2s;">
+        <div style="position:absolute;top:-11px;right:14px;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:#c09a55;color:#fff;padding:4px 12px;border-radius:20px;">RECOMENDADO</div>
+        <div style="font-size:1.5rem;margin-bottom:8px;">🙏</div>
+        <strong style="font-size:0.97rem;color:#1a1412;">Sim, quero a interpretação</strong>
+        <p style="font-size:0.82rem;color:#4a4440;line-height:1.6;margin-top:6px;font-weight:300;">O médium analisa cada parte da carta e te envia a leitura completa junto com a psicografia. Pra quem quer entender tudo o que foi dito.</p>
+      </div>
+      <div class="interp-card" onclick="ir('contribuir')" style="background:#fff;border:1.5px solid #e5ddd2;border-radius:14px;padding:20px 18px;cursor:pointer;transition:all 0.2s;">
+        <div style="font-size:1.5rem;margin-bottom:8px;">🤲</div>
+        <strong style="font-size:0.97rem;color:#1a1412;">Vou ler por conta própria</strong>
+        <p style="font-size:0.82rem;color:#4a4440;line-height:1.6;margin-top:6px;font-weight:300;">Você recebe só a carta psicografada e faz sua própria leitura, no seu tempo.</p>
+      </div>
+    </div>
+    <p style="font-size:0.84rem;color:#888;cursor:pointer;text-align:center;" onclick="ir('como-funciona')">Voltar</p>
+  </div>
+</div>
+
 </body>
 </html>
