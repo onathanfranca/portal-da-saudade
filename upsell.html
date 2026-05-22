@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conexão Espiritual Mensal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #c09a55;
+    --gold-light: #d4b06a;
+    --gold-dark: #a07a35;
+    --navy: #1e3a5f;
+    --cream: #faf7f2;
+    --text: #1a1412;
+    --text-soft: #4a4440;
+    --text-muted: #888;
+    --green: #2ecc71;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    min-height: 100vh;
+    color: var(--text);
+  }
+
+  /* TIMER BAR */
+  .timer-bar {
+    background: var(--gold);
+    color: #fff;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .timer-bar .dot {
+    width: 7px; height: 7px;
+    background: #fff;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .timer-countdown {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* MAIN */
+  .wrapper {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    margin-bottom: 16px;
+  }
+
+  .card-header {
+    padding: 24px 24px 0;
+    text-align: center;
+  }
+
+  .card-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .card-header p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .product-img {
+    width: 100%;
+    display: block;
+    margin: 18px 0 0;
+  }
+
+  .product-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .benefits {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--text-soft);
+  }
+
+  .benefit-item svg {
+    flex-shrink: 0;
+    color: var(--green);
+  }
+
+  /* PRICE + BUTTONS */
+  .cta-block {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    padding: 20px 24px 24px;
+    text-align: center;
+  }
+
+  .price-badge {
+    display: inline-block;
+    background: var(--cream);
+    border: 1.5px solid var(--gold);
+    border-radius: 30px;
+    padding: 6px 20px;
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    margin-bottom: 18px;
+  }
+
+  .price-badge strong {
+    color: var(--gold-dark);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .btn-yes {
+    display: block;
+    width: 100%;
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    margin-bottom: 12px;
+  }
+
+  .btn-yes:hover {
+    background: #219a52;
+    transform: translateY(-1px);
+  }
+
+  .btn-no {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 4px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 28px;
+    padding-bottom: 24px;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
+  .footer-secure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .footer-secure span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Animate in */
+  .card, .cta-block {
+    animation: fadeUp 0.5s ease both;
+  }
+  .cta-block { animation-delay: 0.15s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- TIMER -->
+<div class="timer-bar">
+  <div class="dot"></div>
+  <span>Sua condição especial expira em:</span>
+  <span class="timer-countdown" id="timer">10:00</span>
+</div>
+
+<div class="wrapper">
+
+  <!-- CARD PRODUTO -->
+  <div class="card">
+    <div class="card-header">
+      <h1>Sua conexão com seu ente querido não precisa terminar aqui!</h1>
+      <p>Não deixe que essa conexão termine após sua primeira carta...</p>
+    </div>
+    <div class="product-img">
+      <img src="/img/conexao-mensal.jpg" alt="Conexão Espiritual Mensal">
+    </div>
+    <div class="benefits">
+      <div class="benefit-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Mensagens espirituais mensais
+      </div>
+      <div class="benefit-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Áudios especiais da equipe
+      </div>
+      <div class="benefit-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Prioridade em futuras cartas
+      </div>
+      <div class="benefit-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Conteúdos enviados diretamente no WhatsApp
+      </div>
+      <div class="benefit-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Cancelamento quando quiser
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div class="price-badge">Por apenas <strong>R$ 27,90</strong>/mês</div>
+    <a href="LINK_PERFECTPAY_AQUI" class="btn-yes">Quero continuar minha conexão</a>
+    <button class="btn-no" onclick="recusar()">Não quero continuar</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Portal da Saudade</div>
+    <div class="footer-secure">
+      <span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Compra 100% segura
+      </span>
+      <span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Site protegido
+      </span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Timer 10 minutos
+  let total = 10 * 60;
+  const el = document.getElementById('timer');
+
+  function tick() {
+    if (total <= 0) {
+      el.textContent = '00:00';
+      return;
+    }
+    total--;
+    const m = String(Math.floor(total / 60)).padStart(2, '0');
+    const s = String(total % 60).padStart(2, '0');
+    el.textContent = m + ':' + s;
+    setTimeout(tick, 1000);
+  }
+  tick();
+
+  function recusar() {
+    window.location.href = 'obrigado.html';
+  }
+</script>
+
+</body>
+</html>
