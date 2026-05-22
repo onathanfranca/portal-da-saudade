@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="color-scheme: light only;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Portal da Saudade — Carta Psicografada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light only; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-text-size-adjust:100%; }
+  html,body {
+    background:#f7f3ee!important;
+    color:#1a1412!important;
+    font-family:'DM Sans',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media(prefers-color-scheme:dark){
+    html,body{background:#f7f3ee!important;color:#1a1412!important;}
+    *{color:inherit;background-color:transparent;}
+  }
+
+  /* HEADER */
+  .header {
+    background:#fff;
+    border-bottom:1px solid #e5ddd2;
+    padding:18px 24px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+  }
+  .logo-wrap { display:flex; align-items:center; justify-content:center; gap:10px; }
+  .logo-icon { font-size:1.2rem; }
+  .logo-text {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.35rem;
+    font-weight:600;
+    color:#1e3a5f;
+    letter-spacing:0.02em;
+  }
+  .logo-text em { font-style:italic; color:#c09a55; }
+
+  /* HERO */
+  .hero {
+    text-align:center;
+    padding:52px 24px 32px;
+    max-width:540px;
+    margin:0 auto;
+    width:100%;
+    animation:fadeUp 0.45s ease both;
+  }
+  .hero-badge {
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:0.78rem;
+    font-weight:600;
+    color:#c09a55;
+    background:#fdf5e6;
+    border:1px solid #e8d8b0;
+    padding:7px 16px;
+    border-radius:20px;
+    margin-bottom:24px;
+  }
+  .hero h1 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2.1rem,7vw,2.9rem);
+    font-weight:600;
+    line-height:1.18;
+    color:#1a1412;
+    margin-bottom:16px;
+  }
+  .hero h1 em { font-style:italic; color:#c09a55; }
+  .hero p {
+    font-size:1rem;
+    line-height:1.72;
+    color:#4a4440;
+    margin-bottom:30px;
+    font-weight:300;
+  }
+  .btn-cta {
+    display:block;
+    width:100%;
+    padding:16px 28px;
+    background:#c09a55;
+    color:#fff;
+    font-family:'DM Sans',sans-serif;
+    font-size:1rem;
+    font-weight:600;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    text-decoration:none;
+    text-align:center;
+    transition:all 0.2s;
+    box-shadow:0 6px 20px rgba(192,154,85,0.28);
+  }
+  .btn-cta:hover { background:#a07d3c; transform:translateY(-2px); }
+
+  /* TRUST STRIP */
+  .trust-strip {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:18px 24px 32px;
+    max-width:540px;
+    margin:0 auto;
+    width:100%;
+    animation:fadeUp 0.45s 0.1s ease both;
+  }
+  .trust-item {
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:0.8rem;
+    color:#4a4440;
+    background:#fff;
+    border:1px solid #e5ddd2;
+    border-radius:20px;
+    padding:6px 13px;
+    font-weight:400;
+  }
+
+  /* SECTION */
+  .section { max-width:540px; margin:0 auto; padding:0 24px 40px; width:100%; }
+  .section-eyebrow {
+    font-size:0.72rem;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#c09a55;
+    text-align:center;
+    margin-bottom:8px;
+  }
+  .section-h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.8rem;
+    color:#1a1412;
+    font-weight:600;
+    text-align:center;
+    margin-bottom:28px;
+    line-height:1.2;
+  }
+
+  /* DEPOIMENTOS */
+  .tcard {
+    background:#fff;
+    border:1px solid #e5ddd2;
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:12px;
+  }
+  .tcard-text {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.05rem;
+    font-style:italic;
+    line-height:1.7;
+    color:#2a2420;
+    margin-bottom:16px;
+    font-weight:300;
+  }
+  .tcard-author { display:flex; align-items:center; gap:12px; }
+  .tcard-avatar {
+    width:40px; height:40px;
+    border-radius:50%;
+    background:#1e3a5f;
+    overflow:hidden;
+    flex-shrink:0;
+    border:2px solid #e8d8b0;
+  }
+  .tcard-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .tcard-name { font-size:0.87rem; font-weight:600; color:#1a1412; }
+  .tcard-handle { font-size:0.76rem; color:#7a7470; margin-bottom:2px; }
+  .stars { color:#c09a55; font-size:0.78rem; }
+
+  /* FAQ */
+  .faq-list { display:flex; flex-direction:column; gap:10px; }
+  .faq-item {
+    background:#fff;
+    border:1px solid #e5ddd2;
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .faq-q {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px 18px;
+    cursor:pointer;
+    font-size:0.9rem;
+    font-weight:500;
+    color:#1a1412;
+    gap:12px;
+    line-height:1.45;
+    transition:background 0.2s;
+  }
+  .faq-q:hover { background:#fdf8f2; }
+  .faq-chevron { font-size:0.75rem; color:#c09a55; flex-shrink:0; transition:transform 0.28s ease; }
+  .faq-item.open .faq-chevron { transform:rotate(180deg); }
+  .faq-a {
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.32s ease, padding 0.28s;
+    font-size:0.86rem;
+    color:#4a4440;
+    line-height:1.72;
+    padding:0 18px;
+    font-weight:300;
+  }
+  .faq-item.open .faq-a { max-height:300px; padding:0 18px 16px; }
+
+  /* DIVIDER */
+  .divider { max-width:540px; margin:0 auto 36px; padding:0 24px; }
+  .divider hr { border:none; border-top:1px solid #e5ddd2; }
+
+  /* FOOTER */
+  .footer {
+    background:#fff;
+    border-top:1px solid #e5ddd2;
+    text-align:center;
+    padding:24px 24px 28px;
+    font-size:0.77rem;
+    color:#7a7470;
+    line-height:1.85;
+  }
+  .footer-links { display:flex; justify-content:center; gap:20px; margin-bottom:10px; flex-wrap:wrap; }
+  .footer-links a { color:#7a7470; text-decoration:none; transition:color 0.2s; }
+  .footer-links a:hover { color:#1e3a5f; }
+  .footer-name { font-size:0.88rem; font-weight:500; color:#1a1412; margin-bottom:4px; font-family:'Cormorant Garamond',serif; }
+  .footer-disclaimer {
+    font-size:0.72rem;
+    color:#9a9490;
+    line-height:1.65;
+    max-width:400px;
+    margin:10px auto 0;
+    padding-top:10px;
+    border-top:1px solid #ede8e2;
+  }
+
+  @keyframes fadeUp {
+    from{opacity:0;transform:translateY(14px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-wrap">
+    <div class="logo-icon">🕊️</div>
+    <div class="logo-text">Portal <em>da Saudade</em></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✦ Mais de 14 mil cartas entregues</div>
+  <h1>Receba uma <em>carta</em> do seu ente querido que partiu</h1>
+  <p>Sabe aquela conversa que ficou pra trás? Aquela despedida que faltou? Através da psicografia, seu ente querido ainda pode te dizer o que precisa ser dito.</p>
+  <a href="quiz.html" class="btn-cta">Quero receber minha carta</a>
+</div>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item">🔒 Atendimento sigiloso</div>
+  <div class="trust-item">🕊️ Médiuns experientes</div>
+  <div class="trust-item">💛 +14 mil famílias</div>
+  <div class="trust-item">⚡ Entrega por e-mail</div>
+</div>
+
+
+
+<!-- DEPOIMENTOS -->
+<div class="section">
+  <div class="section-eyebrow">Histórias de quem já recebeu</div>
+  <h2 class="section-h2">Não somos só nós que dizemos</h2>
+
+  <div class="tcard">
+    <div class="tcard-text">"Eu tava num momento muito difícil, ainda não tinha conseguido aceitar a perda do meu pai. Quando recebi a carta, tive que parar tudo. Ele falou de um apelido que só nós dois sabíamos. Chorei muito, mas foi um choro de alívio."</div>
+    <div class="tcard-author">
+      <div class="tcard-avatar"><img src="img/carlos-eduardo.png" alt="Carlos Eduardo"></div>
+      <div><div class="tcard-name">Carlos Eduardo</div><div class="tcard-handle">@caduardo</div><div class="stars">★★★★★</div></div>
+    </div>
+  </div>
+
+  <div class="tcard">
+    <div class="tcard-text">"Estou em paz agora. Meu pai partiu sem que eu pudesse dizer que o amava, mas agora sei que ele está bem e sabe o quanto eu o amo. Agradeço de todo coração."</div>
+    <div class="tcard-author">
+      <div class="tcard-avatar"><img src="img/daniela-braga.png" alt="Daniela Braga"></div>
+      <div><div class="tcard-name">Daniela Braga</div><div class="tcard-handle">@danibrag1</div><div class="stars">★★★★★</div></div>
+    </div>
+  </div>
+
+  <div class="tcard">
+    <div class="tcard-text">"Fiquei todo arrepiado quando recebi a carta. Tudo que havia nela é o que eu precisava ouvir — ela até pediu para eu cuidar bem da minha irmãzinha."</div>
+    <div class="tcard-author">
+      <div class="tcard-avatar"><img src="img/pedro-nunes.png" alt="Pedro Nunes"></div>
+      <div><div class="tcard-name">Pedro Nunes</div><div class="tcard-handle">@p3dronunessilvaa</div><div class="stars">★★★★★</div></div>
+    </div>
+  </div>
+
+  <div class="tcard">
+    <div class="tcard-text">"Meu pai sempre foi meu herói, mas nunca tive coragem de dizer isso antes dele falecer. Agora, com a carta, consegui falar tudo e foi como se ele realmente estivesse ouvindo."</div>
+    <div class="tcard-author">
+      <div class="tcard-avatar"><img src="img/mariana-silva.png" alt="Mariana Silva"></div>
+      <div><div class="tcard-name">Mariana Silva</div><div class="tcard-handle">@marianaasilva0</div><div class="stars">★★★★★</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="section" style="padding-bottom:44px;">
+  <a href="quiz.html" class="btn-cta">Começar agora</a>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- FAQ -->
+<div class="section">
+  <div class="section-eyebrow">Dúvidas frequentes</div>
+  <h2 class="section-h2">Perguntas e respostas</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>O que é uma carta psicografada?</span><span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Uma carta psicografada é uma mensagem espiritual personalizada, preparada com base nas informações que você compartilha sobre o seu ente querido. O serviço tem finalidade de conforto emocional e reflexão espiritual.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>O serviço garante contato com meu ente querido?</span><span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Não garantimos resultados sobrenaturais verificáveis. A proposta é oferecer acolhimento espiritual e conforto emocional, sem substituir apoio profissional de saúde mental.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Como vou receber a carta?</span><span class="faq-chevron">▼</span></div>
+      <div class="faq-a">A carta é entregue por e-mail em formato PDF, no prazo do plano escolhido. Verifique também a pasta de spam caso não encontre na caixa de entrada.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Como meus dados são protegidos?</span><span class="faq-chevron">▼</span></div>
+      <div class="faq-a">As informações que você compartilha são usadas exclusivamente para preparar a carta e realizar o atendimento. Não compartilhamos seus dados com terceiros.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Posso pedir reembolso?</span><span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Sim. Caso a carta não seja entregue no prazo contratado, você tem direito ao reembolso integral. Entre em contato pelo nosso e-mail de suporte.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Qual a forma de pagamento?</span><span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Aceitamos pagamento via Pix, rápido e seguro. A carta é liberada após a confirmação do pagamento.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-name">Portal da Saudade</div>
+  <div class="footer-links">
+    <a href="como-funciona.html">Como Funciona</a>
+    <a href="termos.html">Termos de Uso</a>
+    <a href="privacidade.html">Privacidade</a>
+    <a href="mailto:contato@portaldaSaudade.com.br">Suporte</a>
+  </div>
+  <div class="footer-disclaimer">
+    Este serviço é oferecido para fins de entretenimento, conforto emocional e reflexão espiritual. Não garantimos resultados específicos. O conteúdo não substitui atendimento médico, psicológico, jurídico ou financeiro.
+  </div>
+</div>
+
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
